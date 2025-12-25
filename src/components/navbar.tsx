@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Button } from "./ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
@@ -44,26 +47,24 @@ export default function Navbar() {
                     className="md:hidden flex flex-col gap-1.5 p-2"
                 >
                     <span
-                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${
-                            isOpen ? "rotate-45 translate-y-2" : ""
-                        }`}
+                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${isOpen ? "rotate-45 translate-y-2" : ""
+                            }`}
                     ></span>
                     <span
-                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${
-                            isOpen ? "opacity-0" : ""
-                        }`}
+                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${isOpen ? "opacity-0" : ""
+                            }`}
                     ></span>
                     <span
-                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${
-                            isOpen ? "-rotate-45 -translate-y-2" : ""
-                        }`}
+                        className={`w-6 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all ${isOpen ? "-rotate-45 -translate-y-2" : ""
+                            }`}
                     ></span>
                 </button>
 
                 {/* CTA Button */}
-                <Link href="/dashboard" className="hidden sm:block btn btn-primary text-sm">
-                    Get Started
-                </Link>
+                <div className="hidden md:flex items-center gap-4">
+                    <Button onClick={() => router.push("/dashboard")}>Get Started</Button>
+                    <Button onClick={() => router.push("/login")}>Login</Button>
+                </div>
             </div>
 
             {/* Mobile Menu */}
@@ -86,6 +87,14 @@ export default function Navbar() {
                             onClick={() => setIsOpen(false)}
                         >
                             Get Started
+                        </Link>
+
+                        <Link
+                            href="/dashboard"
+                            className="btn btn-primary text-sm w-full text-center"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Login
                         </Link>
                     </div>
                 </div>
